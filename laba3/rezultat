@@ -1,0 +1,196 @@
+
+            Process A open file (test.c)  for reading
+            ======================================
+
+ TABLE*1
+---------
+ | file name     number inode     locate point     Access mode |
+ |  test.c              3                0           O_RDONLY  |
+
+ TABLE*2
+---------
+ | file name     Descriptor     link  |
+ | ---------     ----------     ------- |
+ | ---------     ----------     ------- |
+ | ---------     ----------     ------- |
+ | test.c               0            0  |
+
+
+             Process B open the file (test.c) for writing
+             =========================================
+
+ TABLE*1
+---------
+ | file name     number inode     locate point     Access mode |
+ |  test.c              3                0           O_RDONLY  |
+ |  test.c              3                0           O_WRONLY  |
+
+ TABLE*2
+---------
+ | file name     Descriptor     link  |
+ | ---------     ----------     ------- |
+ | ---------     ----------     ------- |
+ | ---------     ----------     ------- |
+ | test.c               0            1  |
+
+
+            Process A 
+            ===========
+
+ TABLE*1
+---------
+ | file name     number inode     locate point     Access mode |
+ |  test.c              3                0           O_RDONLY  |
+ |  test.c              3                0           O_WRONLY  |
+
+ TABLE*2
+---------
+ | file name     Descriptor     link  |
+ | ---------     ----------     ------- |
+ | ---------     ----------     ------- |
+ | ---------     ----------     ------- |
+ | test.c               0            0  |
+
+
+             Process B 
+             ==========
+
+ TABLE*1
+---------
+ | file name     number inode     locate point     Access mode |
+ |  test.c              3                0           O_RDONLY  |
+ |  test.c              3                1           O_WRONLY  |
+
+ TABLE*2
+---------
+ | file name     Descriptor     link  |
+ | ---------     ----------     ------- |
+ | ---------     ----------     ------- |
+ | ---------     ----------     ------- |
+ | test.c               0            1  |
+
+
+          Close  Process B 
+
+            Process A 
+            ===========
+
+ TABLE*1
+---------
+ | file name     number inode     locate point     Access mode |
+ |  test.c              3                1           O_RDONLY  |
+
+ TABLE*2
+---------
+ | file name     Descriptor     link  |
+ | ---------     ----------     ------- |
+ | ---------     ----------     ------- |
+ | ---------     ----------     ------- |
+ | test.c               0            0  |
+
+
+          Close  Process A 
+ TABLE*2
+---------
+ | file name     Descriptor     link  |
+ | ---------     ----------     ------- |
+ | ---------     ----------     ------- |
+ | ---------     ----------     ------- |
+
+            Process A open file (test.c)  for reading
+            ======================================
+
+ TABLE*1
+---------
+ | file name     number inode     locate point     Access mode |
+ |  test.c              3                0           O_RDONLY  |
+
+ TABLE*2
+---------
+ | file name     Descriptor     link  |
+ | ---------     ----------     ------- |
+ | ---------     ----------     ------- |
+ | ---------     ----------     ------- |
+ | test.c               0            0  |
+
+
+             Process B open the file (test.c) for writing
+             =========================================
+
+ TABLE*1
+---------
+ | file name     number inode     locate point     Access mode |
+ |  test.c              3                0           O_RDONLY  |
+ |  test.c              3                0           O_WRONLY  |
+
+ TABLE*2
+---------
+ | file name     Descriptor     link  |
+ | ---------     ----------     ------- |
+ | ---------     ----------     ------- |
+ | ---------     ----------     ------- |
+ | test.c               0            1  |
+
+
+            Process A 
+            ===========
+
+ TABLE*1
+---------
+ | file name     number inode     locate point     Access mode |
+ |  test.c              3                0           O_RDONLY  |
+ |  test.c              3                0           O_WRONLY  |
+
+ TABLE*2
+---------
+ | file name     Descriptor     link  |
+ | ---------     ----------     ------- |
+ | ---------     ----------     ------- |
+ | ---------     ----------     ------- |
+ | test.c               0            0  |
+
+
+             Process B 
+             ==========
+
+ TABLE*1
+---------
+ | file name     number inode     locate point     Access mode |
+ |  test.c              3                0           O_RDONLY  |
+ |  test.c              3                1           O_WRONLY  |
+
+ TABLE*2
+---------
+ | file name     Descriptor     link  |
+ | ---------     ----------     ------- |
+ | ---------     ----------     ------- |
+ | ---------     ----------     ------- |
+ | test.c               0            1  |
+
+
+          Close  Process B 
+
+            Process A 
+            ===========
+
+ TABLE*1
+---------
+ | file name     number inode     locate point     Access mode |
+ |  test.c              3                1           O_RDONLY  |
+
+ TABLE*2
+---------
+ | file name     Descriptor     link  |
+ | ---------     ----------     ------- |
+ | ---------     ----------     ------- |
+ | ---------     ----------     ------- |
+ | test.c               0            0  |
+
+
+          Close  Process A 
+ TABLE*2
+---------
+ | file name     Descriptor     link  |
+ | ---------     ----------     ------- |
+ | ---------     ----------     ------- |
+ | ---------     ----------     ------- |
